@@ -7,8 +7,9 @@ function App() {
   return (
     <div className="container mx-auto min-h-screen flex flex-col items-center p-4 w-full">
       <Header />
+      <section className="flex justify-center core-conecpt">
       <main className="mt-8 w-full sm:w-[90%] md:w-[75%] lg:w-[92%] bg-black min-h-full p-4 rounded-lg">
-        <h2 className="text-center mt-4 text-4xl text-white font-bold">
+        <h2 className="text-center text-color mt-4 text-4xl  font-bold">
           Core Concept
         </h2>
         <ul className="flex flex-wrap gap-4 group justify-center mt-3 xl:flex-nowrap lg:grid lg:grid-cols-2 xl:grid-cols-4 md:grid-cols-1">
@@ -24,6 +25,13 @@ function App() {
           })}
         </ul>
       </main>
+      </section>
+      <section id="Example" className="w-full">
+        <h2 className="text-color mt-4 text-4xl font-bold text-left ml-20 ">Examples</h2>
+        <menu>
+
+        </menu>
+      </section>
     </div>
   );
 }
