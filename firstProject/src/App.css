@@ -1,4 +1,5 @@
 @import "tailwindcss";
+/* @import  utilities; */
 /* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap"); */
 html {
   line-height: 1.5;
@@ -14,12 +15,11 @@ html {
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
   font-size: 5rem;
 }
-@layer utilities{
-  .text-color{
-    color:#76447a
+@layer utilities {
+  .text-color {
+    color: #76447a;
   }
- 
-   
-  
-  
+  .bg-pink {
+    background-color: #76447a;
+  }
 }

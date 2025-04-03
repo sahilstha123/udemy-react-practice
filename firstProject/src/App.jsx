@@ -1,6 +1,7 @@
 import "./app.css";
 import Coreconcept from "./components/Coreconcept";
 import Header from "./components/Header";
+import TabButton from "./components/TabButton";
 import { CORE_CONCEPTS as Core } from "./components/data";
 
 function App() {
@@ -26,10 +27,13 @@ function App() {
         </ul>
       </main>
       </section>
-      <section id="Example" className="w-full">
-        <h2 className="text-color mt-4 text-4xl font-bold text-left ml-20 ">Examples</h2>
-        <menu>
-
+      <section id="Example" className="flex flex-col ml-20 w-80 self-start">
+        <h2 className="text-color mt-4 text-4xl font-bold  ">Examples</h2>
+        <menu className="flex gap-0.5 mt-5">
+          <TabButton>Components</TabButton>
+          <TabButton>JSX</TabButton>
+          <TabButton>Props</TabButton>
+          <TabButton>State</TabButton>
         </menu>
       </section>
     </div>
