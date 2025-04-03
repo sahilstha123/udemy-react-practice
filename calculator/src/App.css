@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@layer utilities {
+  .parent {
+    background: linear-gradient(90deg, rgb(28, 24, 98), rgb(173, 32, 145));
+  }
+  .rotate{
+    transform: perspective(80rem) rotateX(30deg);
+  }
+}
