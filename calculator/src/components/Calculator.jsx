@@ -72,7 +72,7 @@ const Calculator = () => {
   console.log("display", Display); // Log display state on every render
 
   return (
-    <div className="w-[50%] sm:w-[35%] mx-auto bg-black rounded-lg p-4 antialiased rotate">
+    <div className="w-[90%] sm:w-[65%] md:w-[60%] lg:w-[45%] xl:w-[35%] mx-auto bg-black rounded-lg p-4 antialiased rotate">
       {/* Display Screen */}
       <header>
         <div className="text-white w-full min-h-20 bg-gray-900 rounded-lg text-right p-4 text-5xl flex justify-end items-center">

@@ -3,7 +3,7 @@ import Calculator from "./components/Calculator";
 
 function App() {
   return (
-    <div className="parent w-screen  h-screen  overflow-hidden  ">
+    <div className="parent w-screen  h-screen  overflow-hidden   ">
       <Calculator />
     </div>
   );
