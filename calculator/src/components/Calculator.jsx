@@ -23,56 +23,60 @@ const Calculator = () => {
     ".",
     "=",
   ];
+  const Operators = ["%", "/", "*", "+", "-"];
   const [Display, setDisplay] = useState("0.00");
-  const [Expression, setExpression] = useState("");
-  const handleOnButtonClick = (value) => {
-    console.log("Value clicked: ", value);
-    // checks the button type is AC
-    if (value === "AC") {
-      setDisplay("0.00");
-      setExpression("");
-    }
-    // checks the button type is C
-    else if (value === "C") {
-      setExpression((prev) => prev.slice(0, -1));
-      setDisplay((prev) => (prev.length > 0 ? prev.slice(0, -1) : "0.00"));
-    }
-    // If the dot (.) button is clicked to input a decimal point
-    else if (value === ".") {
-      // Split the expression at operators (+, -, *, /, %) and check the last number
-      const splitlastnumber = Expression.split(/[+\-/*%]/).pop();
 
-      // checks that last expression includes (dot)
-      if (splitlastnumber.includes(".")) return;
-
-      // checks the last Expression include any computed opertor
-      const isOperator = /[+\-*/%]/.test(Expression);
-      const newExpression = isOperator
-        ? Expression + "0" + value
-        : Expression + value;
-      setDisplay(newExpression);
-      setExpression(newExpression);
-    } else if (value === "=") {
-      try {
-        const result = eval(Expression);
-        setDisplay(String(result));
-        setExpression(String(result));
-      } catch {
-        setDisplay("error");
-      }
-    } else {
-      const newExpression = Expression + value;
-      setDisplay(newExpression);
-      setExpression(newExpression);
+  const displayTotal = () => {
+    let expression = Display
+    const lastchar = expression[expression.length - 1];
+    if (Operators.includes(lastchar)) {
+      expression=(expression.slice(0, -1));
+    }
+    try {
+      const total = eval(expression); 
+      setDisplay(total.toString());
+    } catch (error) {
+      console.error("Error in evaluating:", error);
+      setDisplay("Error");
     }
   };
+
+  const buttonAction = (value) => {
+    if (value === "AC") {
+      setDisplay("0.00");
+    } else if (value === "C") {
+      setDisplay(Display.slice(0, -1) || "0.00");
+    } else if (value === "=") {
+     
+      displayTotal();
+    } else if (Operators.includes(value)) {
+      const lastchar = Display[Display.length - 1];
+      if (Operators.includes(lastchar)) {
+        setDisplay(Display.slice(0, -1) + value);
+      } else {
+        setDisplay(Display + value);
+      }
+    } else if (value === ".") {
+      const splitchar = Display.split(/[+\-*/%]/);
+      if (splitchar.includes(".")) return;
+      setDisplay(Display + value);
+    } else {
+      setDisplay((prev) => prev==="0.00" ?value: prev + value);
+    }
+  };
+
+  const handleOnButtonClick = (value) => {
+    buttonAction(value);
+  };
+
+  console.log("display", Display); // Log display state on every render
 
   return (
     <div className="w-[50%] sm:w-[35%] mx-auto bg-black rounded-lg p-4 antialiased rotate">
       {/* Display Screen */}
       <header>
         <div className="text-white w-full min-h-20 bg-gray-900 rounded-lg text-right p-4 text-5xl flex justify-end items-center">
-          {Display}
+          {Display || "0.00"}
         </div>
       </header>
 
