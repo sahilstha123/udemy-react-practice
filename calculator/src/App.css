@@ -6,4 +6,25 @@
   .rotate{
     transform: perspective(80rem) rotateX(30deg);
   }
+  .prank {
+    background: red;
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: translateX(10px);
+    }
+    50% {
+      transform: translateX(-10px);
+    }
+    80% {
+      transform: translateX(10px);
+    }
+    100% {
+      transform: translateX(-10px);
+    }
+  }
+  
+  
 }
