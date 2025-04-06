@@ -25,20 +25,32 @@ const Calculator = () => {
   ];
   const Operators = ["%", "/", "*", "+", "-"];
   const [Display, setDisplay] = useState("0.00");
+  const [isprank, setispprank] = useState(false);
 
   const displayTotal = () => {
-    let expression = Display
+    const ran = randomNumber();
+    let expression = Display;
     const lastchar = expression[expression.length - 1];
     if (Operators.includes(lastchar)) {
-      expression=(expression.slice(0, -1));
+      expression = expression.slice(0, -1);
     }
     try {
-      const total = eval(expression); 
+      const total = eval(expression) + ran;
+      console.log("isprank", isprank);
       setDisplay(total.toString());
+      if (ran !== 0) {
+        setispprank(true);
+      }
     } catch (error) {
       console.error("Error in evaluating:", error);
       setDisplay("Error");
     }
+  };
+
+  // random value to make a prank calc
+  const randomNumber = () => {
+    const num = Math.round(Math.random()*10);
+    return num < 4 ? num : 0;
   };
 
   const buttonAction = (value) => {
@@ -47,7 +59,6 @@ const Calculator = () => {
     } else if (value === "C") {
       setDisplay(Display.slice(0, -1) || "0.00");
     } else if (value === "=") {
-     
       displayTotal();
     } else if (Operators.includes(value)) {
       const lastchar = Display[Display.length - 1];
@@ -61,11 +72,12 @@ const Calculator = () => {
       if (splitchar.includes(".")) return;
       setDisplay(Display + value);
     } else {
-      setDisplay((prev) => prev==="0.00" ?value: prev + value);
+      setDisplay((prev) => (prev === "0.00" ? value : prev + value));
     }
   };
 
   const handleOnButtonClick = (value) => {
+    setispprank(false)
     buttonAction(value);
   };
 
@@ -75,7 +87,10 @@ const Calculator = () => {
     <div className="w-[90%] sm:w-[65%] md:w-[60%] lg:w-[45%] xl:w-[35%] mx-auto bg-black rounded-lg p-4 antialiased rotate">
       {/* Display Screen */}
       <header>
-        <div className="text-white w-full min-h-20 bg-gray-900 rounded-lg text-right p-4 text-5xl flex justify-end items-center">
+        <div
+          className={`text-white w-full min-h-20 bg-gray-900 rounded-lg text-right p-4 text-5xl flex 
+          justify-end items-center ${isprank ? "prank" : ""} `}
+        >
           {Display || "0.00"}
         </div>
       </header>
