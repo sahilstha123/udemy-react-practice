@@ -26,6 +26,7 @@ const Calculator = () => {
   const Operators = ["%", "/", "*", "+", "-"];
   const [Display, setDisplay] = useState("0.00");
   const [isprank, setispprank] = useState(false);
+  const [isMousedown, setisMousedown] = useState();
 
   const displayTotal = () => {
     const ran = randomNumber();
@@ -49,7 +50,7 @@ const Calculator = () => {
 
   // random value to make a prank calc
   const randomNumber = () => {
-    const num = Math.round(Math.random()*10);
+    const num = Math.round(Math.random() * 10);
     return num < 4 ? num : 0;
   };
 
@@ -77,11 +78,21 @@ const Calculator = () => {
   };
 
   const handleOnButtonClick = (value) => {
-    setispprank(false)
+    setisMousedown();
+    setispprank(false);
     buttonAction(value);
   };
 
-  console.log("display", Display); // Log display state on every render
+  const handleOnMousedown = (value) => {
+    setisMousedown(value);
+  };
+
+  const scaling = {
+    transform: isMousedown ? "scale(0.9)" : "scale(1)",
+    transition: "transform 0.5s ease",
+  };
+  console.log("mouse down", isMousedown);
+  // console.log("display", Display); // Log display state on every render
 
   return (
     <div className="w-[90%] sm:w-[65%] md:w-[60%] lg:w-[45%] xl:w-[35%] mx-auto bg-black rounded-lg p-4 antialiased rotate">
@@ -104,6 +115,8 @@ const Calculator = () => {
             : "bg-gray-500 w-16 sm:w-24";
           return (
             <Button
+            scaling={scaling}
+            isMousedown={isMousedown}
               key={`${rowIndex}`}
               label={row}
               className={
@@ -112,6 +125,7 @@ const Calculator = () => {
                   : buttonClass
               }
               handleOnButtonClick={handleOnButtonClick}
+              handleOnMousedown={handleOnMousedown}
             />
           );
         })}
