@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button";
-
+import audio from "../assets/aa.wav"
 const Calculator = () => {
   const buttonLayout = [
     "AC",
@@ -27,7 +27,7 @@ const Calculator = () => {
   const [Display, setDisplay] = useState("0.00");
   const [isprank, setispprank] = useState(false);
   const [isMousedown, setisMousedown] = useState();
-
+const prankaudio = new Audio(audio)
   const displayTotal = () => {
     const ran = randomNumber();
     let expression = Display;
@@ -41,6 +41,7 @@ const Calculator = () => {
       setDisplay(total.toString());
       if (ran !== 0) {
         setispprank(true);
+        prankaudio.play()
       }
     } catch (error) {
       console.error("Error in evaluating:", error);
@@ -79,7 +80,7 @@ const Calculator = () => {
 
   const handleOnButtonClick = (value) => {
     setisMousedown();
-    setispprank(false);
+    isprank && setispprank(false);
     buttonAction(value);
   };
 
